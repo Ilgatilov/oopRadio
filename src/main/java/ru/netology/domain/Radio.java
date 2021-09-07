@@ -14,9 +14,10 @@ public class Radio {
 
     public int changeTheStationByRemoteControl(int presetStation) {
         if (presetStation >= minStation) {
+            this.currentRadioStation = currentRadioStation;
         }
         if (presetStation <= maxStation) {
-            currentRadioStation = presetStation;
+            this.currentRadioStation = presetStation;
         } else {
             this.currentRadioStation = currentRadioStation;
         }
