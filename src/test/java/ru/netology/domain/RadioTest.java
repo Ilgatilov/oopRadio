@@ -7,27 +7,27 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class RadioTest {
 
     @Test
-    void shouldTheStationByRemoteControl() {
+    void shouldTheStationAboveMax() {
         Radio radio = new Radio();
-        assertEquals(3, radio.changeTheStationByRemoteControl(3));
+        int expected = radio.getCurrentRadioStation();
+        radio.setCurrentRadioStation(radio.getMaxStation() + 3);
+        int actual = radio.getCurrentRadioStation();
+        assertEquals(expected, actual);
     }
 
     @Test
-    void shouldTheStationByRemoteControlIfNumber() {
+    void shouldTheStationAboveMin() {
         Radio radio = new Radio();
-        assertEquals(7, radio.changeTheStationByRemoteControl(radio.getCurrentRadioStation()));
-    }
-
-    @Test
-    void shouldTheStationByRemoteControlIfNumberIsWrong() {
-        Radio radio = new Radio();
-        assertEquals(7, radio.changeTheStationByRemoteControl(13));
+        int expected = radio.getCurrentRadioStation();
+        radio.setCurrentRadioStation(radio.getMinStation() - 3);
+        int actual = radio.getCurrentRadioStation();
+        assertEquals(expected, actual);
     }
 
     @Test
     void shouldTheStationByButtonNextIfCurrentIsNine() {
         Radio radio = new Radio();
-        radio.setCurrentRadioStation(radio.maxStation);
+        radio.setCurrentRadioStation(radio.getMaxStation());
         radio.nextRadioStation();
         assertEquals(0, radio.getCurrentRadioStation());
     }
@@ -36,13 +36,13 @@ class RadioTest {
     void shouldTheStationByButtonNext() {
         Radio radio = new Radio();
         radio.nextRadioStation();
-        assertEquals(8, radio.getCurrentRadioStation());
+        assertEquals(1, radio.getCurrentRadioStation());
     }
 
     @Test
     void shouldTheStationByButtonPrevIfCurrentIsNull() {
         Radio radio = new Radio();
-        radio.setCurrentRadioStation(radio.minStation);
+        radio.setCurrentRadioStation(radio.getMinStation());
         radio.prevRadioStation();
         assertEquals(9, radio.getCurrentRadioStation());
     }
@@ -50,15 +50,17 @@ class RadioTest {
     @Test
     void shouldTheStationByButtonPrev() {
         Radio radio = new Radio();
+        radio.setCurrentRadioStation(3);
+        int expected = 2;
         radio.prevRadioStation();
-        assertEquals(6, radio.getCurrentRadioStation());
+        assertEquals(expected, radio.getCurrentRadioStation());
     }
 
     @Test
     void shouldIncreaseVolume() {
         Radio radio = new Radio();
         radio.increaseVolume();
-        assertEquals(8, radio.getCurrentVolume());
+        assertEquals(1, radio.getCurrentVolume());
     }
 
     @Test
@@ -72,8 +74,10 @@ class RadioTest {
     @Test
     void shouldDecreaseVolume() {
         Radio radio = new Radio();
+        radio.setCurrentVolume(3);
+        int expected = 2;
         radio.decreaseVolume();
-        assertEquals(6, radio.getCurrentVolume());
+        assertEquals(expected, radio.getCurrentVolume());
     }
 
     @Test
