@@ -15,9 +15,7 @@ class RadioTest {
     @Test
     void shouldTheStationByRemoteControlIfNumberIsWrong() {
         Radio radio = new Radio();
-        radio.setCurrentRadioStation(radio.maxStation);
-        radio.changeTheStationByRemoteControl(13);
-        assertEquals(9, radio.getCurrentRadioStation());
+        assertEquals(0, radio.changeTheStationByRemoteControl(13));
     }
 
     @Test
