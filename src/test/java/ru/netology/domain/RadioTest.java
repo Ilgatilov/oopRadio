@@ -15,7 +15,7 @@ class RadioTest {
     @Test
     void shouldTheStationByRemoteControlIfNumberIsWrong() {
         Radio radio = new Radio();
-        assertEquals(0, radio.changeTheStationByRemoteControl(13));
+        assertEquals(7, radio.changeTheStationByRemoteControl(13));
     }
 
     @Test
@@ -30,29 +30,29 @@ class RadioTest {
     void shouldTheStationByButtonNext() {
         Radio radio = new Radio();
         radio.nextRadioStation();
-        assertEquals(1, radio.getCurrentRadioStation());
+        assertEquals(8, radio.getCurrentRadioStation());
     }
 
     @Test
     void shouldTheStationByButtonPrevIfCurrentIsNull() {
         Radio radio = new Radio();
-        radio.setCurrentRadioStation(3);
+        radio.setCurrentRadioStation(radio.minStation);
         radio.prevRadioStation();
-        assertEquals(2, radio.getCurrentRadioStation());
+        assertEquals(9, radio.getCurrentRadioStation());
     }
 
     @Test
     void shouldTheStationByButtonPrev() {
         Radio radio = new Radio();
         radio.prevRadioStation();
-        assertEquals(9, radio.getCurrentRadioStation());
+        assertEquals(6, radio.getCurrentRadioStation());
     }
 
     @Test
     void shouldIncreaseVolume() {
         Radio radio = new Radio();
         radio.increaseVolume();
-        assertEquals(1, radio.getCurrentVolume());
+        assertEquals(8, radio.getCurrentVolume());
     }
 
     @Test
@@ -66,14 +66,14 @@ class RadioTest {
     @Test
     void shouldDecreaseVolume() {
         Radio radio = new Radio();
-        radio.setCurrentVolume(3);
         radio.decreaseVolume();
-        assertEquals(2, radio.getCurrentVolume());
+        assertEquals(6, radio.getCurrentVolume());
     }
 
     @Test
     void shouldDecreaseVolumeIfMin() {
         Radio radio = new Radio();
+        radio.setCurrentVolume(0);
         radio.decreaseVolume();
         assertEquals(0, radio.getCurrentVolume());
     }

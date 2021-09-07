@@ -1,20 +1,24 @@
 package ru.netology.domain;
 
 public class Radio {
+    private int currentRadioStation = 7;
     int minStation = 0;
     int maxStation = 9;
-    private int currentRadioStation;
+    private int currentVolume = 7;
     int minVolume = 0;
     int maxVolume = 10;
-    private int currentVolume;
 
     public int getCurrentRadioStation() {
         return currentRadioStation;
     }
 
     public int changeTheStationByRemoteControl(int presetStation) {
-        if (presetStation <= maxStation && presetStation >= minStation) {
+        if (presetStation >= minStation) {
+        }
+        if (presetStation <= maxStation) {
             currentRadioStation = presetStation;
+        } else {
+            this.currentRadioStation = currentRadioStation;
         }
         return currentRadioStation;
     }
